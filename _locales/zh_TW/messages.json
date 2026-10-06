@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "分頁縮圖切換器"
+  },
+  "extDesc": {
+    "message": "以縮圖網格瀏覽並切換分頁，支援視窗位置預設與分割畫面。"
+  },
+  "cmdOpen": {
+    "message": "開啟分頁切換器"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ 個分頁",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "目前分頁"
+  },
+  "splitView": {
+    "message": "分割畫面"
+  },
+  "refresh": {
+    "message": "重新整理所有縮圖"
+  },
+  "newTab": {
+    "message": "新分頁"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "closeTab": {
+    "message": "關閉分頁"
+  },
+  "columns": {
+    "message": "每列縮圖數"
+  },
+  "theme": {
+    "message": "主題"
+  },
+  "themeSystem": {
+    "message": "跟隨系統"
+  },
+  "themeLight": {
+    "message": "淺色"
+  },
+  "themeDark": {
+    "message": "深色"
+  },
+  "showShortcuts": {
+    "message": "在縮圖上顯示快速鍵"
+  },
+  "openMode": {
+    "message": "開啟方式"
+  },
+  "openModeWindow": {
+    "message": "浮動視窗"
+  },
+  "openModePopup": {
+    "message": "工具列彈出"
+  },
+  "windowPreset": {
+    "message": "視窗位置"
+  },
+  "presetCenter": {
+    "message": "置中"
+  },
+  "presetTop": {
+    "message": "頂部置中（橫向）"
+  },
+  "presetBottom": {
+    "message": "底部置中（橫向）"
+  },
+  "presetLeft": {
+    "message": "左側置中（直向）"
+  },
+  "presetRight": {
+    "message": "右側置中（直向）"
+  },
+  "shortcutKey": {
+    "message": "鍵盤快速鍵"
+  },
+  "changeShortcut": {
+    "message": "變更"
+  },
+  "notSet": {
+    "message": "未設定"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ 移動 · Enter 切換 · Delete 關閉 · Esc 離開\n以中鍵點擊縮圖可關閉分頁。"
+  }
+}

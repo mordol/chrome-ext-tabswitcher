@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "标签页缩略图切换器"
+  },
+  "extDesc": {
+    "message": "以缩略图网格浏览和切换标签页，支持窗口位置预设和分屏视图。"
+  },
+  "cmdOpen": {
+    "message": "打开标签页切换器"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ 个标签页",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "当前标签页"
+  },
+  "splitView": {
+    "message": "分屏视图"
+  },
+  "refresh": {
+    "message": "刷新所有缩略图"
+  },
+  "newTab": {
+    "message": "新标签页"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "closeTab": {
+    "message": "关闭标签页"
+  },
+  "columns": {
+    "message": "每行缩略图数"
+  },
+  "theme": {
+    "message": "主题"
+  },
+  "themeSystem": {
+    "message": "跟随系统"
+  },
+  "themeLight": {
+    "message": "浅色"
+  },
+  "themeDark": {
+    "message": "深色"
+  },
+  "showShortcuts": {
+    "message": "在缩略图上显示快捷键"
+  },
+  "openMode": {
+    "message": "打开方式"
+  },
+  "openModeWindow": {
+    "message": "浮动窗口"
+  },
+  "openModePopup": {
+    "message": "工具栏弹出"
+  },
+  "windowPreset": {
+    "message": "窗口位置"
+  },
+  "presetCenter": {
+    "message": "居中"
+  },
+  "presetTop": {
+    "message": "顶部居中（横向）"
+  },
+  "presetBottom": {
+    "message": "底部居中（横向）"
+  },
+  "presetLeft": {
+    "message": "左侧居中（纵向）"
+  },
+  "presetRight": {
+    "message": "右侧居中（纵向）"
+  },
+  "shortcutKey": {
+    "message": "键盘快捷键"
+  },
+  "changeShortcut": {
+    "message": "更改"
+  },
+  "notSet": {
+    "message": "未设置"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ 移动 · Enter 切换 · Delete 关闭 · Esc 退出\n中键点击缩略图可关闭标签页。"
+  }
+}

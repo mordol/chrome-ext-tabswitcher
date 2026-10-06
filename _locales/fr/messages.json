@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Sélecteur de miniatures d'onglets"
+  },
+  "extDesc": {
+    "message": "Parcourez et changez d'onglet depuis une grille de miniatures, avec positions de fenêtre prédéfinies et prise en charge de l'écran partagé."
+  },
+  "cmdOpen": {
+    "message": "Ouvrir le sélecteur d'onglets"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ onglets",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Onglet actuel"
+  },
+  "splitView": {
+    "message": "Écran partagé"
+  },
+  "refresh": {
+    "message": "Actualiser toutes les miniatures"
+  },
+  "newTab": {
+    "message": "Nouvel onglet"
+  },
+  "settings": {
+    "message": "Paramètres"
+  },
+  "closeTab": {
+    "message": "Fermer l'onglet"
+  },
+  "columns": {
+    "message": "Miniatures par ligne"
+  },
+  "theme": {
+    "message": "Thème"
+  },
+  "themeSystem": {
+    "message": "Système"
+  },
+  "themeLight": {
+    "message": "Clair"
+  },
+  "themeDark": {
+    "message": "Sombre"
+  },
+  "showShortcuts": {
+    "message": "Afficher les raccourcis sur les miniatures"
+  },
+  "openMode": {
+    "message": "Ouvrir en tant que"
+  },
+  "openModeWindow": {
+    "message": "Fenêtre flottante"
+  },
+  "openModePopup": {
+    "message": "Fenêtre de la barre d'outils"
+  },
+  "windowPreset": {
+    "message": "Position de la fenêtre"
+  },
+  "presetCenter": {
+    "message": "Centre"
+  },
+  "presetTop": {
+    "message": "Haut centré (horizontal)"
+  },
+  "presetBottom": {
+    "message": "Bas centré (horizontal)"
+  },
+  "presetLeft": {
+    "message": "Gauche centré (vertical)"
+  },
+  "presetRight": {
+    "message": "Droite centré (vertical)"
+  },
+  "shortcutKey": {
+    "message": "Raccourci clavier"
+  },
+  "changeShortcut": {
+    "message": "Modifier"
+  },
+  "notSet": {
+    "message": "Non défini"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ déplacer · Entrée changer · Suppr fermer · Échap quitter\nClic du milieu sur une miniature pour la fermer."
+  }
+}

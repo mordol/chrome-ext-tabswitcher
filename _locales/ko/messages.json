@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "탭 썸네일 스위처"
+  },
+  "extDesc": {
+    "message": "썸네일 그리드로 탭을 보고 전환합니다. 창 위치 프리셋과 분할 보기를 지원합니다."
+  },
+  "cmdOpen": {
+    "message": "탭 스위처 열기"
+  },
+  "tabsCount": {
+    "message": "탭 $COUNT$개",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "현재 탭"
+  },
+  "splitView": {
+    "message": "분할 보기"
+  },
+  "refresh": {
+    "message": "모든 썸네일 새로고침"
+  },
+  "newTab": {
+    "message": "새 탭"
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "closeTab": {
+    "message": "탭 닫기"
+  },
+  "columns": {
+    "message": "한 줄당 썸네일 수"
+  },
+  "theme": {
+    "message": "테마"
+  },
+  "themeSystem": {
+    "message": "시스템"
+  },
+  "themeLight": {
+    "message": "라이트"
+  },
+  "themeDark": {
+    "message": "다크"
+  },
+  "showShortcuts": {
+    "message": "썸네일에 단축키 표시"
+  },
+  "openMode": {
+    "message": "열기 방식"
+  },
+  "openModeWindow": {
+    "message": "플로팅 창"
+  },
+  "openModePopup": {
+    "message": "툴바 팝업"
+  },
+  "windowPreset": {
+    "message": "창 위치"
+  },
+  "presetCenter": {
+    "message": "중앙"
+  },
+  "presetTop": {
+    "message": "상단 중앙 (가로)"
+  },
+  "presetBottom": {
+    "message": "하단 중앙 (가로)"
+  },
+  "presetLeft": {
+    "message": "좌측 중앙 (세로)"
+  },
+  "presetRight": {
+    "message": "우측 중앙 (세로)"
+  },
+  "shortcutKey": {
+    "message": "단축키"
+  },
+  "changeShortcut": {
+    "message": "변경"
+  },
+  "notSet": {
+    "message": "설정 안 됨"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ 이동 · Enter 전환 · Delete 닫기 · Esc 닫기\n썸네일을 가운데 클릭하면 탭이 닫힙니다."
+  }
+}

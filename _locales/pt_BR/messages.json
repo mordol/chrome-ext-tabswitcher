@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Alternador de miniaturas de abas"
+  },
+  "extDesc": {
+    "message": "Navegue e alterne abas em uma grade de miniaturas, com posições de janela predefinidas e suporte à visualização dividida."
+  },
+  "cmdOpen": {
+    "message": "Abrir o alternador de abas"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ abas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Aba atual"
+  },
+  "splitView": {
+    "message": "Visualização dividida"
+  },
+  "refresh": {
+    "message": "Atualizar todas as miniaturas"
+  },
+  "newTab": {
+    "message": "Nova aba"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "closeTab": {
+    "message": "Fechar aba"
+  },
+  "columns": {
+    "message": "Miniaturas por linha"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistema"
+  },
+  "themeLight": {
+    "message": "Claro"
+  },
+  "themeDark": {
+    "message": "Escuro"
+  },
+  "showShortcuts": {
+    "message": "Mostrar atalhos nas miniaturas"
+  },
+  "openMode": {
+    "message": "Abrir como"
+  },
+  "openModeWindow": {
+    "message": "Janela flutuante"
+  },
+  "openModePopup": {
+    "message": "Pop-up da barra de ferramentas"
+  },
+  "windowPreset": {
+    "message": "Posição da janela"
+  },
+  "presetCenter": {
+    "message": "Centro"
+  },
+  "presetTop": {
+    "message": "Topo central (horizontal)"
+  },
+  "presetBottom": {
+    "message": "Base central (horizontal)"
+  },
+  "presetLeft": {
+    "message": "Esquerda central (vertical)"
+  },
+  "presetRight": {
+    "message": "Direita central (vertical)"
+  },
+  "shortcutKey": {
+    "message": "Atalho de teclado"
+  },
+  "changeShortcut": {
+    "message": "Alterar"
+  },
+  "notSet": {
+    "message": "Não definido"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ mover · Enter alternar · Delete fechar · Esc sair\nClique com o botão do meio em uma miniatura para fechá-la."
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Tab-Miniaturen-Umschalter"
+  },
+  "extDesc": {
+    "message": "Tabs in einem Miniaturraster durchsuchen und wechseln – mit Fensterpositions-Vorlagen und Split-View-Unterstützung."
+  },
+  "cmdOpen": {
+    "message": "Tab-Umschalter öffnen"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ Tabs",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Aktueller Tab"
+  },
+  "splitView": {
+    "message": "Geteilte Ansicht"
+  },
+  "refresh": {
+    "message": "Alle Miniaturen aktualisieren"
+  },
+  "newTab": {
+    "message": "Neuer Tab"
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "closeTab": {
+    "message": "Tab schließen"
+  },
+  "columns": {
+    "message": "Miniaturen pro Zeile"
+  },
+  "theme": {
+    "message": "Design"
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeLight": {
+    "message": "Hell"
+  },
+  "themeDark": {
+    "message": "Dunkel"
+  },
+  "showShortcuts": {
+    "message": "Tastenkürzel auf Miniaturen anzeigen"
+  },
+  "openMode": {
+    "message": "Öffnen als"
+  },
+  "openModeWindow": {
+    "message": "Schwebendes Fenster"
+  },
+  "openModePopup": {
+    "message": "Symbolleisten-Popup"
+  },
+  "windowPreset": {
+    "message": "Fensterposition"
+  },
+  "presetCenter": {
+    "message": "Mitte"
+  },
+  "presetTop": {
+    "message": "Oben mittig (horizontal)"
+  },
+  "presetBottom": {
+    "message": "Unten mittig (horizontal)"
+  },
+  "presetLeft": {
+    "message": "Links mittig (vertikal)"
+  },
+  "presetRight": {
+    "message": "Rechts mittig (vertikal)"
+  },
+  "shortcutKey": {
+    "message": "Tastenkürzel"
+  },
+  "changeShortcut": {
+    "message": "Ändern"
+  },
+  "notSet": {
+    "message": "Nicht festgelegt"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ bewegen · Enter wechseln · Entf schließen · Esc beenden\nMittelklick auf eine Miniatur schließt den Tab."
+  }
+}

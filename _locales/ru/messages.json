@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Переключатель миниатюр вкладок"
+  },
+  "extDesc": {
+    "message": "Просматривайте и переключайте вкладки в сетке миниатюр с предустановками положения окна и поддержкой разделённого экрана."
+  },
+  "cmdOpen": {
+    "message": "Открыть переключатель вкладок"
+  },
+  "tabsCount": {
+    "message": "Вкладок: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Текущая вкладка"
+  },
+  "splitView": {
+    "message": "Разделённый экран"
+  },
+  "refresh": {
+    "message": "Обновить все миниатюры"
+  },
+  "newTab": {
+    "message": "Новая вкладка"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "closeTab": {
+    "message": "Закрыть вкладку"
+  },
+  "columns": {
+    "message": "Миниатюр в строке"
+  },
+  "theme": {
+    "message": "Тема"
+  },
+  "themeSystem": {
+    "message": "Системная"
+  },
+  "themeLight": {
+    "message": "Светлая"
+  },
+  "themeDark": {
+    "message": "Тёмная"
+  },
+  "showShortcuts": {
+    "message": "Показывать клавиши на миниатюрах"
+  },
+  "openMode": {
+    "message": "Открывать как"
+  },
+  "openModeWindow": {
+    "message": "Плавающее окно"
+  },
+  "openModePopup": {
+    "message": "Всплывающее окно панели"
+  },
+  "windowPreset": {
+    "message": "Положение окна"
+  },
+  "presetCenter": {
+    "message": "По центру"
+  },
+  "presetTop": {
+    "message": "Сверху по центру (горизонтально)"
+  },
+  "presetBottom": {
+    "message": "Снизу по центру (горизонтально)"
+  },
+  "presetLeft": {
+    "message": "Слева по центру (вертикально)"
+  },
+  "presetRight": {
+    "message": "Справа по центру (вертикально)"
+  },
+  "shortcutKey": {
+    "message": "Сочетание клавиш"
+  },
+  "changeShortcut": {
+    "message": "Изменить"
+  },
+  "notSet": {
+    "message": "Не задано"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ перемещение · Enter переключить · Delete закрыть · Esc выход\nЩелчок средней кнопкой по миниатюре закрывает вкладку."
+  }
+}

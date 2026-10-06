@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "タブサムネイル スイッチャー"
+  },
+  "extDesc": {
+    "message": "サムネイルのグリッドでタブを一覧・切り替え。ウィンドウ位置のプリセットと分割表示に対応。"
+  },
+  "cmdOpen": {
+    "message": "タブスイッチャーを開く"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ 個のタブ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "現在のタブ"
+  },
+  "splitView": {
+    "message": "分割表示"
+  },
+  "refresh": {
+    "message": "すべてのサムネイルを更新"
+  },
+  "newTab": {
+    "message": "新しいタブ"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "closeTab": {
+    "message": "タブを閉じる"
+  },
+  "columns": {
+    "message": "1 行あたりのサムネイル数"
+  },
+  "theme": {
+    "message": "テーマ"
+  },
+  "themeSystem": {
+    "message": "システム"
+  },
+  "themeLight": {
+    "message": "ライト"
+  },
+  "themeDark": {
+    "message": "ダーク"
+  },
+  "showShortcuts": {
+    "message": "サムネイルにショートカットキーを表示"
+  },
+  "openMode": {
+    "message": "開き方"
+  },
+  "openModeWindow": {
+    "message": "フローティングウィンドウ"
+  },
+  "openModePopup": {
+    "message": "ツールバーのポップアップ"
+  },
+  "windowPreset": {
+    "message": "ウィンドウ位置"
+  },
+  "presetCenter": {
+    "message": "中央"
+  },
+  "presetTop": {
+    "message": "上部中央（横長）"
+  },
+  "presetBottom": {
+    "message": "下部中央（横長）"
+  },
+  "presetLeft": {
+    "message": "左側中央（縦長）"
+  },
+  "presetRight": {
+    "message": "右側中央（縦長）"
+  },
+  "shortcutKey": {
+    "message": "キーボード ショートカット"
+  },
+  "changeShortcut": {
+    "message": "変更"
+  },
+  "notSet": {
+    "message": "未設定"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ 移動 · Enter 切り替え · Delete 閉じる · Esc 終了\nサムネイルを中クリックするとタブを閉じます。"
+  }
+}

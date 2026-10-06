@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Tab Thumbnails Switcher"
+  },
+  "extDesc": {
+    "message": "Browse and switch tabs from a thumbnail grid, with window position presets and split view support."
+  },
+  "cmdOpen": {
+    "message": "Open the tab switcher"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ tabs",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Current tab"
+  },
+  "splitView": {
+    "message": "Split view"
+  },
+  "refresh": {
+    "message": "Refresh all thumbnails"
+  },
+  "newTab": {
+    "message": "New tab"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "closeTab": {
+    "message": "Close tab"
+  },
+  "columns": {
+    "message": "Thumbnails per row"
+  },
+  "theme": {
+    "message": "Theme"
+  },
+  "themeSystem": {
+    "message": "System"
+  },
+  "themeLight": {
+    "message": "Light"
+  },
+  "themeDark": {
+    "message": "Dark"
+  },
+  "showShortcuts": {
+    "message": "Show shortcut keys on thumbnails"
+  },
+  "openMode": {
+    "message": "Open as"
+  },
+  "openModeWindow": {
+    "message": "Floating window"
+  },
+  "openModePopup": {
+    "message": "Toolbar popup"
+  },
+  "windowPreset": {
+    "message": "Window position"
+  },
+  "presetCenter": {
+    "message": "Center"
+  },
+  "presetTop": {
+    "message": "Top center (horizontal)"
+  },
+  "presetBottom": {
+    "message": "Bottom center (horizontal)"
+  },
+  "presetLeft": {
+    "message": "Left center (vertical)"
+  },
+  "presetRight": {
+    "message": "Right center (vertical)"
+  },
+  "shortcutKey": {
+    "message": "Keyboard shortcut"
+  },
+  "changeShortcut": {
+    "message": "Change"
+  },
+  "notSet": {
+    "message": "Not set"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ move · Enter switch · Delete close · Esc close\nMiddle-click a thumbnail to close it."
+  }
+}

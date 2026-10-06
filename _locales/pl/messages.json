@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Przełącznik miniatur kart"
+  },
+  "extDesc": {
+    "message": "Przeglądaj i przełączaj karty w siatce miniatur, z predefiniowanymi pozycjami okna i obsługą widoku podzielonego."
+  },
+  "cmdOpen": {
+    "message": "Otwórz przełącznik kart"
+  },
+  "tabsCount": {
+    "message": "Karty: $COUNT$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Bieżąca karta"
+  },
+  "splitView": {
+    "message": "Widok podzielony"
+  },
+  "refresh": {
+    "message": "Odśwież wszystkie miniatury"
+  },
+  "newTab": {
+    "message": "Nowa karta"
+  },
+  "settings": {
+    "message": "Ustawienia"
+  },
+  "closeTab": {
+    "message": "Zamknij kartę"
+  },
+  "columns": {
+    "message": "Miniatury w wierszu"
+  },
+  "theme": {
+    "message": "Motyw"
+  },
+  "themeSystem": {
+    "message": "Systemowy"
+  },
+  "themeLight": {
+    "message": "Jasny"
+  },
+  "themeDark": {
+    "message": "Ciemny"
+  },
+  "showShortcuts": {
+    "message": "Pokaż skróty na miniaturach"
+  },
+  "openMode": {
+    "message": "Otwieraj jako"
+  },
+  "openModeWindow": {
+    "message": "Okno pływające"
+  },
+  "openModePopup": {
+    "message": "Wyskakujące okno paska"
+  },
+  "windowPreset": {
+    "message": "Pozycja okna"
+  },
+  "presetCenter": {
+    "message": "Środek"
+  },
+  "presetTop": {
+    "message": "Góra, środek (poziomo)"
+  },
+  "presetBottom": {
+    "message": "Dół, środek (poziomo)"
+  },
+  "presetLeft": {
+    "message": "Lewo, środek (pionowo)"
+  },
+  "presetRight": {
+    "message": "Prawo, środek (pionowo)"
+  },
+  "shortcutKey": {
+    "message": "Skrót klawiszowy"
+  },
+  "changeShortcut": {
+    "message": "Zmień"
+  },
+  "notSet": {
+    "message": "Nie ustawiono"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ ruch · Enter przełącz · Delete zamknij · Esc wyjdź\nKliknij miniaturę środkowym przyciskiem, aby ją zamknąć."
+  }
+}

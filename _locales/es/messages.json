@@ -1,0 +1,94 @@
+{
+  "extName": {
+    "message": "Selector de miniaturas de pestañas"
+  },
+  "extDesc": {
+    "message": "Explora y cambia de pestaña desde una cuadrícula de miniaturas, con posiciones de ventana predefinidas y vista dividida."
+  },
+  "cmdOpen": {
+    "message": "Abrir el selector de pestañas"
+  },
+  "tabsCount": {
+    "message": "$COUNT$ pestañas",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "currentTab": {
+    "message": "Pestaña actual"
+  },
+  "splitView": {
+    "message": "Vista dividida"
+  },
+  "refresh": {
+    "message": "Actualizar todas las miniaturas"
+  },
+  "newTab": {
+    "message": "Nueva pestaña"
+  },
+  "settings": {
+    "message": "Configuración"
+  },
+  "closeTab": {
+    "message": "Cerrar pestaña"
+  },
+  "columns": {
+    "message": "Miniaturas por fila"
+  },
+  "theme": {
+    "message": "Tema"
+  },
+  "themeSystem": {
+    "message": "Sistema"
+  },
+  "themeLight": {
+    "message": "Claro"
+  },
+  "themeDark": {
+    "message": "Oscuro"
+  },
+  "showShortcuts": {
+    "message": "Mostrar atajos en las miniaturas"
+  },
+  "openMode": {
+    "message": "Abrir como"
+  },
+  "openModeWindow": {
+    "message": "Ventana flotante"
+  },
+  "openModePopup": {
+    "message": "Ventana emergente de la barra"
+  },
+  "windowPreset": {
+    "message": "Posición de la ventana"
+  },
+  "presetCenter": {
+    "message": "Centro"
+  },
+  "presetTop": {
+    "message": "Arriba al centro (horizontal)"
+  },
+  "presetBottom": {
+    "message": "Abajo al centro (horizontal)"
+  },
+  "presetLeft": {
+    "message": "Izquierda al centro (vertical)"
+  },
+  "presetRight": {
+    "message": "Derecha al centro (vertical)"
+  },
+  "shortcutKey": {
+    "message": "Atajo de teclado"
+  },
+  "changeShortcut": {
+    "message": "Cambiar"
+  },
+  "notSet": {
+    "message": "Sin definir"
+  },
+  "keyboardHelp": {
+    "message": "←→↑↓ mover · Enter cambiar · Supr cerrar · Esc salir\nClic central en una miniatura para cerrarla."
+  }
+}

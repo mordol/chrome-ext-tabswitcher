@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title data-i18n="extName"></title>
+  <link rel="stylesheet" href="switcher.css">
+</head>
+<body>
+  <header class="toolbar">
+    <span id="count" class="count"></span>
+    <div class="actions">
+      <button id="refresh" class="icon-btn" data-i18n-title="refresh">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>
+      </button>
+      <button id="newTab" class="icon-btn" data-i18n-title="newTab">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <button id="openSettings" class="icon-btn" data-i18n-title="settings">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="grid" class="grid"></main>
+
+  <div id="settings" class="settings" hidden>
+    <div class="panel">
+      <h2 data-i18n="settings"></h2>
+      <label class="row">
+        <span data-i18n="columns"></span>
+        <span class="range"><input id="columns" type="range" min="2" max="6" step="1"><output id="columnsOut"></output></span>
+      </label>
+      <label class="row">
+        <span data-i18n="theme"></span>
+        <select id="theme">
+          <option value="system" data-i18n="themeSystem"></option>
+          <option value="light" data-i18n="themeLight"></option>
+          <option value="dark" data-i18n="themeDark"></option>
+        </select>
+      </label>
+      <label class="row">
+        <span data-i18n="showShortcuts"></span>
+        <input id="showShortcuts" type="checkbox">
+      </label>
+      <label class="row">
+        <span data-i18n="openMode"></span>
+        <select id="openMode">
+          <option value="window" data-i18n="openModeWindow"></option>
+          <option value="popup" data-i18n="openModePopup"></option>
+        </select>
+      </label>
+      <div class="row">
+        <span data-i18n="windowPreset"></span>
+        <div id="preset" class="preset-picker">
+          <button data-preset="top" data-i18n-title="presetTop"><i class="p-top"></i></button>
+          <button data-preset="left" data-i18n-title="presetLeft"><i class="p-left"></i></button>
+          <button data-preset="center" data-i18n-title="presetCenter"><i class="p-center"></i></button>
+          <button data-preset="right" data-i18n-title="presetRight"><i class="p-right"></i></button>
+          <button data-preset="bottom" data-i18n-title="presetBottom"><i class="p-bottom"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <span data-i18n="shortcutKey"></span>
+        <span class="shortcut"><kbd id="shortcut"></kbd><button id="changeShortcut" class="link" data-i18n="changeShortcut"></button></span>
+      </div>
+      <p class="hint" data-i18n="keyboardHelp"></p>
+    </div>
+  </div>
+
+  <script type="module" src="switcher.js"></script>
+</body>
+</html>
