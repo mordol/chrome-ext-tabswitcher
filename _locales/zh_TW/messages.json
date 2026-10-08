@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ 移動 · Enter 切換 · Delete 關閉 · Esc 離開\n以中鍵點擊縮圖可關閉分頁。"
+  },
+  "reorderHelp": {
+    "message": "拖曳縮圖或按 Alt (⌥) + 方向鍵可調整分頁順序。"
   }
 }

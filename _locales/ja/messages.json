@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ 移動 · Enter 切り替え · Delete 閉じる · Esc 終了\nサムネイルを中クリックするとタブを閉じます。"
+  },
+  "reorderHelp": {
+    "message": "サムネイルをドラッグするか、Alt (⌥) + 矢印キーでタブの順序を変更できます。"
   }
 }

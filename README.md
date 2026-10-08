@@ -22,6 +22,7 @@ Inspired by [Tab Thumbnails](https://chromewebstore.google.com/detail/tab-thumbn
 - Click a card to switch to that tab.
 - Close a tab with the × button in the top-left corner, or by middle-clicking the card.
 - The **+** button opens a new tab.
+- Drag a card onto another position to reorder tabs. This moves the real browser tabs, so the tab strip follows and the order is kept. Both tabs of a split view move together, and pinned tabs stay before unpinned ones.
 
 ### Keyboard
 
@@ -30,6 +31,8 @@ Inspired by [Tab Thumbnails](https://chromewebstore.google.com/detail/tab-thumbn
 | `←` `→` | Move the selection; wraps across rows |
 | `↑` `↓` | Move the selection; keeps the column |
 | `Enter` | Switch to the selected tab |
+| `Alt` (`⌥`) + `←` `→` | Move the selected tab one position |
+| `Alt` (`⌥`) + `↑` `↓` | Move the selected tab one row |
 | `Delete` / `Backspace` | Close the selected tab |
 | `Esc` | Close settings, or close the switcher |
 | `1`–`9`, `0`, `a`–`z` | Jump to a tab (turn on **Show shortcut keys on thumbnails**) |

@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ 移动 · Enter 切换 · Delete 关闭 · Esc 退出\n中键点击缩略图可关闭标签页。"
+  },
+  "reorderHelp": {
+    "message": "拖动缩略图或按 Alt (⌥) + 方向键可调整标签页顺序。"
   }
 }

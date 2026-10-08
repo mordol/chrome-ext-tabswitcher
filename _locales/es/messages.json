@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ mover · Enter cambiar · Supr cerrar · Esc salir\nClic central en una miniatura para cerrarla."
+  },
+  "reorderHelp": {
+    "message": "Arrastra una miniatura o pulsa Alt (⌥) + flechas para reordenar las pestañas."
   }
 }

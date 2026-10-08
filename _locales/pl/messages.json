@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ ruch · Enter przełącz · Delete zamknij · Esc wyjdź\nKliknij miniaturę środkowym przyciskiem, aby ją zamknąć."
+  },
+  "reorderHelp": {
+    "message": "Przeciągnij miniaturę lub naciśnij Alt (⌥) + strzałki, aby zmienić kolejność kart."
   }
 }

@@ -116,6 +116,20 @@ button { font: inherit; color: inherit; }
 .card.selected { outline-color: var(--muted); }
 .card.active { outline: 3px solid var(--accent); }
 
+/* Drag & drop reordering */
+.card.dragging { opacity: 0.4; }
+.card.drop-before::after, .card.drop-after::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+  z-index: 4;
+}
+.card.drop-before::after { left: calc(var(--gap) / -2 - 2px); }
+.card.drop-after::after { right: calc(var(--gap) / -2 - 2px); }
+
 .thumbs {
   display: flex;
   height: calc(var(--card-w) * var(--ratio));

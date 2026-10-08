@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ bewegen · Enter wechseln · Entf schließen · Esc beenden\nMittelklick auf eine Miniatur schließt den Tab."
+  },
+  "reorderHelp": {
+    "message": "Ziehe eine Miniatur oder drücke Alt (⌥) + Pfeiltasten, um Tabs neu anzuordnen."
   }
 }

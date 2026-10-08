@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ déplacer · Entrée changer · Suppr fermer · Échap quitter\nClic du milieu sur une miniature pour la fermer."
+  },
+  "reorderHelp": {
+    "message": "Faites glisser une miniature ou appuyez sur Alt (⌥) + flèches pour réorganiser les onglets."
   }
 }

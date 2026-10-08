@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ move · Enter switch · Delete close · Esc close\nMiddle-click a thumbnail to close it."
+  },
+  "reorderHelp": {
+    "message": "Drag a thumbnail, or press Alt (⌥) + arrow keys, to reorder tabs."
   }
 }

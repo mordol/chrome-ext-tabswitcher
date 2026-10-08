@@ -20,6 +20,8 @@ let selected = 0;
 let cols = 4;
 let windowSize = null;     // outer size the user resized the window to; kept until the preset changes
 let ignoreResizeUntil = 0; // resize events caused by our own windows.update
+let dragFrom = null;       // index of the card being dragged
+let dropSlot = null;       // insertion slot (0..items.length) under the pointer
 
 // ---------------------------------------------------------------- data
 
@@ -117,7 +119,7 @@ function cardEl(item, index) {
   card.append(thumbsEl);
 
   const favs = el('span', 'favs');
-  for (const tab of item.tabs) favs.append(el('img', '', { src: faviconUrl(tab, 16), alt: '' }));
+  for (const tab of item.tabs) favs.append(el('img', '', { src: faviconUrl(tab, 16), alt: '', draggable: false }));
   const meta = el('div', 'meta');
   meta.append(favs, el('span', 'title', {
     textContent: item.tabs.map((tab) => tab.title || tab.url).join('  │  '),
@@ -134,6 +136,18 @@ function cardEl(item, index) {
     else closeItem(item);
   });
   card.addEventListener('mouseenter', () => select(index, false));
+
+  card.draggable = true;
+  card.addEventListener('dragstart', (e) => {
+    dragFrom = index;
+    e.dataTransfer.effectAllowed = 'move';
+    card.classList.add('dragging');
+  });
+  card.addEventListener('dragend', () => {
+    card.classList.remove('dragging');
+    setDropMarker(null);
+    dragFrom = null;
+  });
   return card;
 }
 
@@ -286,6 +300,56 @@ async function refreshAll() {
   }
 }
 
+// ---------------------------------------------------------------- reorder
+
+// Move the card at `from` so it ends up at position `to` by moving its tabs in the browser.
+// The grid follows the tab order, so tabs.onMoved re-renders it and the order persists.
+async function moveItem(from, to) {
+  const item = items[from];
+  if (!item) return;
+  const rest = items.filter((_, i) => i !== from);
+  // Pinned and unpinned tabs can't be interleaved: keep the card on its side of the boundary.
+  const pinned = rest.filter((other) => other.tabs[0].pinned).length;
+  to = item.tabs[0].pinned ? Math.min(to, pinned) : Math.max(to, pinned);
+  to = Math.max(0, Math.min(to, rest.length));
+  if (to === from) return;
+  const index = rest.slice(0, to).reduce((n, other) => n + other.tabs.length, 0);
+  selected = to;
+  // Both tabs of a split view move together, which keeps the split intact. tabs.move places
+  // the tabs one at a time, so moving right would leave a tab between the two panes;
+  // move them last-first instead so each lands directly at its final index.
+  const ids = item.tabs.map((tab) => tab.id);
+  if (to < from || ids.length === 1) {
+    await chrome.tabs.move(ids, { index });
+  } else {
+    for (let i = ids.length - 1; i >= 0; i--) await chrome.tabs.move(ids[i], { index: index + i });
+  }
+}
+
+function setDropMarker(card, after) {
+  grid.querySelector('.drop-before, .drop-after')?.classList.remove('drop-before', 'drop-after');
+  card?.classList.add(after ? 'drop-after' : 'drop-before');
+}
+
+function initDragAndDrop() {
+  grid.addEventListener('dragover', (e) => {
+    if (dragFrom === null) return;
+    e.preventDefault();
+    const card = e.target.closest('.card');
+    if (!card) return; // over a gap: keep the last slot
+    const rect = card.getBoundingClientRect();
+    const after = e.clientX > rect.left + rect.width / 2;
+    setDropMarker(card, after);
+    dropSlot = Number(card.dataset.index) + (after ? 1 : 0);
+  });
+  grid.addEventListener('drop', (e) => {
+    if (dragFrom === null || dropSlot === null) return;
+    e.preventDefault();
+    moveItem(dragFrom, dropSlot > dragFrom ? dropSlot - 1 : dropSlot);
+    dropSlot = null;
+  });
+}
+
 // ---------------------------------------------------------------- keyboard
 
 function onKeyDown(e) {
@@ -298,6 +362,13 @@ function onKeyDown(e) {
   }
   const n = items.length;
   if (!n && e.key !== 'Escape') return;
+  if (e.altKey && e.key.startsWith('Arrow')) {
+    // Alt/Option + arrows move the selected card: left/right by one, up/down by a row.
+    const to = selected + { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -cols, ArrowDown: cols }[e.key];
+    e.preventDefault();
+    if (to >= 0 && to < n) moveItem(selected, to);
+    return;
+  }
   switch (e.key) {
     case 'ArrowLeft': select((selected - 1 + n) % n); break;
     case 'ArrowRight': select((selected + 1) % n); break;
@@ -444,6 +515,7 @@ async function init() {
     closeSwitcher();
   });
   document.addEventListener('keydown', onKeyDown);
+  initDragAndDrop();
 
   const inWindow = (fn) => (...args) => { if (fn(...args)) scheduleRefresh(); };
   chrome.tabs.onCreated.addListener(inWindow((tab) => tab.windowId === windowId));

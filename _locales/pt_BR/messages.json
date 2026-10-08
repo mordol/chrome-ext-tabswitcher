@@ -93,5 +93,8 @@
   },
   "keyboardHelp": {
     "message": "←→↑↓ mover · Enter alternar · Delete fechar · Esc sair\nClique com o botão do meio em uma miniatura para fechá-la."
+  },
+  "reorderHelp": {
+    "message": "Arraste uma miniatura ou pressione Alt (⌥) + setas para reordenar as abas."
   }
 }
