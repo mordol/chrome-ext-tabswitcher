@@ -37,6 +37,9 @@
   "columns": {
     "message": "Miniatury w wierszu"
   },
+  "minThumbWidth": {
+    "message": "Minimalna szerokość miniatury"
+  },
   "theme": {
     "message": "Motyw"
   },

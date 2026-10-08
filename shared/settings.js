@@ -4,6 +4,7 @@ export const DEFAULT_SETTINGS = {
   showShortcuts: false,
   openMode: 'window',  // window | popup
   preset: 'center',    // center | top | bottom | left | right
+  minCard: 120,        // minimum thumbnail width (px); below it the grid scrolls
 };
 
 export const PRESETS = ['center', 'top', 'bottom', 'left', 'right'];

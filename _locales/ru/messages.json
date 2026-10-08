@@ -37,6 +37,9 @@
   "columns": {
     "message": "Миниатюр в строке"
   },
+  "minThumbWidth": {
+    "message": "Минимальная ширина миниатюры"
+  },
   "theme": {
     "message": "Тема"
   },

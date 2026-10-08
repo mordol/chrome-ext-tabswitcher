@@ -1,5 +1,5 @@
 import { loadSettings, saveSettings, thumbKey } from './shared/settings.js';
-import { computeLayout, computePopupLayout } from './shared/layout.js';
+import { computeLayout, computePopupLayout, fitToWindow, placeWindow } from './shared/layout.js';
 import { groupTabs } from './shared/split.js';
 
 const params = new URLSearchParams(location.search);
@@ -18,6 +18,8 @@ let items = [];   // [{ tabs: Tab[], active: boolean }], one per card; split vie
 let thumbs = {};  // tabId -> { url, data }
 let selected = 0;
 let cols = 4;
+let windowSize = null;     // outer size the user resized the window to; kept until the preset changes
+let ignoreResizeUntil = 0; // resize events caused by our own windows.update
 
 // ---------------------------------------------------------------- data
 
@@ -75,14 +77,13 @@ function renderThumb(thumb, tab) {
     : el('img', 'big-fav', { src: faviconUrl(tab), alt: '', draggable: false }));
 }
 
-function cardEl(item, index, dense) {
+function cardEl(item, index) {
   const split = item.tabs.length > 1;
   const primary = primaryTab(item);
   const card = el('div', 'card');
   card.classList.toggle('active', item.active);
   card.classList.toggle('selected', index === selected);
   card.classList.toggle('split', split);
-  card.classList.toggle('dense', dense);
   card.dataset.index = index;
   card.title = item.tabs.map((tab) => tab.title || tab.url).join('\n');
 
@@ -140,14 +141,12 @@ function setGridVars(layoutCols, cardW) {
   cols = layoutCols;
   document.documentElement.style.setProperty('--cols', layoutCols);
   document.documentElement.style.setProperty('--card-w', `${cardW}px`);
-  return cardW;
+  grid.classList.toggle('dense', cardW < 150);
 }
 
 function render() {
-  const cardW = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--card-w'));
-  const dense = cardW < 150;
   selected = Math.min(selected, Math.max(0, items.length - 1));
-  grid.replaceChildren(...items.map((item, i) => cardEl(item, i, dense)));
+  grid.replaceChildren(...items.map((item, i) => cardEl(item, i)));
   const tabCount = items.reduce((n, item) => n + item.tabs.length, 0);
   $('count').textContent = t('tabsCount', [String(tabCount)]);
 }
@@ -163,30 +162,89 @@ function select(index, scroll = true) {
 
 // ---------------------------------------------------------------- layout
 
+let selfTabId = null;
+async function currentZoom() {
+  selfTabId ??= (await chrome.tabs.getCurrent())?.id;
+  return selfTabId ? chrome.tabs.getZoom(selfTabId).catch(() => 1) : 1;
+}
+
+/**
+ * Fit the cards and, with move, set the window bounds: the user's size if one is saved
+ * (positioned by the preset), otherwise the preset's automatic size.
+ */
 async function applyLayout({ move = true } = {}) {
   if (mode === 'popup') {
     const layout = computePopupLayout(settings.columns);
     setGridVars(layout.cols, layout.cardW);
     return;
   }
-  const frame = { w: outerWidth - innerWidth, h: outerHeight - innerHeight };
-  const { frame: saved } = await chrome.storage.local.get('frame');
-  if (!saved || saved.w !== frame.w || saved.h !== frame.h) await chrome.storage.local.set({ frame });
-
-  const layout = computeLayout({
-    count: items.length,
-    preset: settings.preset,
-    columns: settings.columns,
-    area: { left: screen.availLeft, top: screen.availTop, width: screen.availWidth, height: screen.availHeight },
-    frame,
-  });
-  setGridVars(layout.cols, layout.cardW);
-  if (!move) return;
-  const win = await chrome.windows.get(selfWindowId);
-  const { left, top, width, height } = layout;
-  if (win.left !== left || win.top !== top || win.width !== width || win.height !== height) {
-    await chrome.windows.update(selfWindowId, { left, top, width, height });
+  // Window bounds are screen px, inner sizes CSS px: convert with the page zoom (Dia defaults to 125%).
+  const zoom = await currentZoom();
+  const frame = { w: outerWidth - Math.round(innerWidth * zoom), h: outerHeight - Math.round(innerHeight * zoom) };
+  const saved = await chrome.storage.local.get(['frame', 'zoom']);
+  if (saved.zoom !== zoom || saved.frame?.w !== frame.w || saved.frame?.h !== frame.h) {
+    await chrome.storage.local.set({ frame, zoom });
   }
+  const area = { left: screen.availLeft, top: screen.availTop, width: screen.availWidth, height: screen.availHeight };
+
+  let bounds;
+  if (windowSize) {
+    // The user picked the window size: keep it and scale the cards to fit.
+    const fit = fitToWindow({ count: items.length, innerW: innerWidth, innerH: innerHeight, minCard: settings.minCard });
+    setGridVars(fit.cols, fit.cardW);
+    const width = Math.min(windowSize.width, area.width);
+    const height = Math.min(windowSize.height, area.height);
+    bounds = { width, height, ...placeWindow(settings.preset, area, width, height) };
+  } else {
+    bounds = computeLayout({
+      count: items.length,
+      preset: settings.preset,
+      columns: settings.columns,
+      minCard: settings.minCard,
+      area,
+      frame,
+      zoom,
+    });
+    setGridVars(bounds.cols, bounds.cardW);
+  }
+  if (move) await setBounds(bounds);
+}
+
+const BOUND_KEYS = ['left', 'top', 'width', 'height'];
+
+// Some browsers (e.g. Dia) apply a requested size to the page area instead of the whole
+// window, so check the result and correct the request by the difference.
+async function setBounds(target) {
+  const request = Object.fromEntries(BOUND_KEYS.map((k) => [k, target[k]]));
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const win = await chrome.windows.get(selfWindowId);
+    const diff = BOUND_KEYS.map((k) => win[k] - target[k]);
+    if (diff.every((d) => Math.abs(d) <= 1)) return;
+    if (attempt > 0) BOUND_KEYS.forEach((k, i) => { request[k] -= diff[i]; });
+    ignoreResizeUntil = Date.now() + 500;
+    await chrome.windows.update(selfWindowId, request);
+  }
+}
+
+// Remember how the browser's actual window differed from what the background requested,
+// so the next window can be created at the right size without a visible correction.
+async function recordCreateDelta() {
+  const requested = params.get('req')?.split(',').map(Number);
+  if (requested?.length !== 4) return;
+  const win = await chrome.windows.get(selfWindowId);
+  const createDelta = Object.fromEntries(BOUND_KEYS.map((k, i) => [k, win[k] - requested[i]]));
+  await chrome.storage.local.set({ createDelta });
+}
+
+let saveSizeTimer;
+function onResize() {
+  // Resizes from our own windows.update only refit the cards; a user resize also becomes the saved size.
+  if (Date.now() >= ignoreResizeUntil) {
+    windowSize = { width: outerWidth, height: outerHeight };
+    clearTimeout(saveSizeTimer);
+    saveSizeTimer = setTimeout(() => chrome.storage.local.set({ windowSize }), 300);
+  }
+  if (windowSize) applyLayout({ move: false });
 }
 
 let refreshTimer;
@@ -195,7 +253,7 @@ function scheduleRefresh() {
   refreshTimer = setTimeout(async () => {
     const before = items.length;
     items = await loadItems();
-    if (items.length !== before) await applyLayout();
+    if (items.length !== before) await applyLayout({ move: !windowSize });
     render();
   }, 60);
 }
@@ -281,8 +339,17 @@ async function initSettings() {
   columns.addEventListener('input', async () => {
     $('columnsOut').value = columns.value;
     await update({ columns: Number(columns.value) });
-    await applyLayout();
+    await applyLayout({ move: !windowSize });
     render();
+  });
+
+  const minCard = $('minCard');
+  minCard.value = settings.minCard;
+  $('minCardOut').value = settings.minCard;
+  minCard.addEventListener('input', async () => {
+    $('minCardOut').value = minCard.value;
+    await update({ minCard: Number(minCard.value) });
+    await applyLayout({ move: !windowSize });
   });
 
   $('theme').value = settings.theme;
@@ -306,6 +373,9 @@ async function initSettings() {
   for (const button of presetButtons) {
     button.addEventListener('click', async () => {
       await update({ preset: button.dataset.preset });
+      // A new preset drops the user's window size and returns to the preset's default size.
+      windowSize = null;
+      await chrome.storage.local.remove('windowSize');
       markPreset();
       await applyLayout();
       render();
@@ -345,6 +415,7 @@ async function init() {
   }
 
   settings = await loadSettings();
+  if (mode === 'window') ({ windowSize = null } = await chrome.storage.local.get('windowSize'));
   applyTheme();
   items = await loadItems();
   selected = Math.max(0, items.findIndex((item) => item.active));
@@ -354,8 +425,11 @@ async function init() {
   await initSettings();
 
   if (mode === 'window') {
-    // The background used an estimated frame size; correct it now that the real one is known.
+    // The background used an estimated frame size and the browser may have sized the window
+    // differently than requested; correct it now that the real numbers are known.
+    await recordCreateDelta();
     await applyLayout();
+    window.addEventListener('resize', onResize);
     window.addEventListener('blur', () => {
       setTimeout(() => { if (!document.hasFocus()) closeSwitcher(); }, 150);
     });

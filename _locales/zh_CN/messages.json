@@ -37,6 +37,9 @@
   "columns": {
     "message": "每行缩略图数"
   },
+  "minThumbWidth": {
+    "message": "最小缩略图宽度"
+  },
   "theme": {
     "message": "主题"
   },

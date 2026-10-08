@@ -37,6 +37,9 @@
   "columns": {
     "message": "한 줄당 썸네일 수"
   },
+  "minThumbWidth": {
+    "message": "최소 썸네일 폭"
+  },
   "theme": {
     "message": "테마"
   },

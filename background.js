@@ -1,5 +1,5 @@
 import { loadSettings, thumbKey } from './shared/settings.js';
-import { computeLayout } from './shared/layout.js';
+import { computeLayout, placeWindow } from './shared/layout.js';
 import { groupTabs } from './shared/split.js';
 
 const THUMB_WIDTH = 640;
@@ -180,26 +180,43 @@ async function toggleSwitcherWindow() {
 
   const target = await chrome.windows.getLastFocused({ windowTypes: ['normal'] }).catch(() => null);
   if (!target) return;
-  const [settings, tabs, { frame }] = await Promise.all([
+  const [settings, tabs, { frame, zoom, windowSize, createDelta }] = await Promise.all([
     loadSettings(),
     chrome.tabs.query({ windowId: target.id }),
-    chrome.storage.local.get('frame'),
+    chrome.storage.local.get(['frame', 'zoom', 'windowSize', 'createDelta']),
   ]);
-  const layout = computeLayout({
-    count: groupTabs(tabs, target.width).length,
-    preset: settings.preset,
-    columns: settings.columns,
-    area: await workAreaFor(target),
-    frame: frame || { w: 0, h: 28 },
-  });
+  const area = await workAreaFor(target);
+  let layout;
+  if (windowSize) {
+    // Size chosen by the user (kept until the preset changes); only the position follows the preset.
+    const width = Math.min(windowSize.width, area.width);
+    const height = Math.min(windowSize.height, area.height);
+    layout = { width, height, ...placeWindow(settings.preset, area, width, height) };
+  } else {
+    layout = computeLayout({
+      count: groupTabs(tabs, target.width).length,
+      preset: settings.preset,
+      columns: settings.columns,
+      minCard: settings.minCard,
+      area,
+      frame: frame || { w: 0, h: 28 },
+      zoom: zoom || 1,
+    });
+  }
+  // Some browsers (e.g. Dia) size a new window differently than requested; the switcher page
+  // measures the difference (createDelta) and we pre-compensate for it here.
+  const d = createDelta || {};
+  const req = {
+    left: layout.left - (d.left || 0),
+    top: layout.top - (d.top || 0),
+    width: layout.width - (d.width || 0),
+    height: layout.height - (d.height || 0),
+  };
   const win = await chrome.windows.create({
-    url: `switcher.html?mode=window&windowId=${target.id}`,
+    url: `switcher.html?mode=window&windowId=${target.id}&req=${[req.left, req.top, req.width, req.height]}`,
     type: 'popup',
     focused: true,
-    left: layout.left,
-    top: layout.top,
-    width: layout.width,
-    height: layout.height,
+    ...req,
   });
   await chrome.storage.session.set({ switcherId: win.id });
 }

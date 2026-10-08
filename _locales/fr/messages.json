@@ -37,6 +37,9 @@
   "columns": {
     "message": "Miniatures par ligne"
   },
+  "minThumbWidth": {
+    "message": "Largeur minimale des miniatures"
+  },
   "theme": {
     "message": "Thème"
   },

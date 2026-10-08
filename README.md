@@ -50,10 +50,18 @@ By default the switcher opens as a floating window. You can place it in one of f
 To use the original toolbar popup instead, set **Open as** to **Toolbar popup**.
 
 ### Automatic scaling
-The window size, number of rows and columns, and card size (120–340 px) are chosen to fit the number of tabs, and recalculated when tabs open or close.
+The window size, number of rows and columns, and card size (up to 340 px) are chosen to fit the number of tabs, and recalculated when tabs open or close.
 - Top and bottom presets stay a single row as long as cards are at least 160 px wide.
 - Left and right presets use as few columns as possible.
-- If the tabs don't fit even at the minimum card size, the grid scrolls.
+- If the tabs don't fit even at the minimum thumbnail width, the grid scrolls. The minimum width is a setting (80–240 px, default 120 px).
+
+### Custom window size
+Resize the switcher window and it keeps that size the next time it opens. The thumbnails scale to fit the window instead:
+- A wide window fits the thumbnails to its height; a tall window fits them to its width.
+- More tabs make the thumbnails smaller, down to the minimum thumbnail width; past that, the grid scrolls.
+- The window still opens at the selected preset's position.
+
+Choosing a position preset discards the custom size and returns to the preset's automatic size.
 
 ### Split view
 Two tabs shown side by side in a split view appear as **one card**, with each pane's thumbnail on its own half.

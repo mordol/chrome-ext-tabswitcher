@@ -158,7 +158,7 @@ button { font: inherit; color: inherit; }
   font-size: 12px;
   line-height: 1.3;
 }
-.card.dense .title { -webkit-line-clamp: 1; display: block; white-space: nowrap; text-overflow: ellipsis; }
+.grid.dense .title { -webkit-line-clamp: 1; display: block; white-space: nowrap; text-overflow: ellipsis; }
 
 .close {
   position: absolute;
@@ -219,7 +219,7 @@ button { font: inherit; color: inherit; }
   border-bottom: 1px solid var(--border);
 }
 .range { display: flex; align-items: center; gap: 8px; }
-.range output { width: 1.2em; text-align: right; }
+.range output { width: 2em; text-align: right; }
 select {
   background: var(--bg); color: var(--text);
   border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px;

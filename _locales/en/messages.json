@@ -37,6 +37,9 @@
   "columns": {
     "message": "Thumbnails per row"
   },
+  "minThumbWidth": {
+    "message": "Minimum thumbnail width"
+  },
   "theme": {
     "message": "Theme"
   },

@@ -37,6 +37,9 @@
   "columns": {
     "message": "1 行あたりのサムネイル数"
   },
+  "minThumbWidth": {
+    "message": "サムネイルの最小幅"
+  },
   "theme": {
     "message": "テーマ"
   },

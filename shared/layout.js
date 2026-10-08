@@ -7,7 +7,7 @@ export const M = {
   header: 48,     // toolbar height
   titleH: 42,     // title area under the thumbnail
   ratio: 0.625,   // thumbnail height / width (16:10)
-  minCard: 120,
+  minCard: 120,   // default for the user's minimum thumbnail width setting
   prefCard: 160,  // edge presets keep a single strip as long as cards stay at least this wide
   maxCard: 340,
   margin: 8,      // distance from the screen edge for edge presets
@@ -27,21 +27,49 @@ export const cardHeight = (w) => Math.round(w * M.ratio) + M.titleH;
 const gridWidth = (cols, w) => M.pad * 2 + cols * w + (cols - 1) * M.gap;
 const gridHeight = (rows, w) => M.header + M.pad * 2 + rows * cardHeight(w) + (rows - 1) * M.gap;
 
+// Largest card width for a cols x rows grid inside an inner (viewport) size.
+function fitCardWidth(cols, rows, innerW, innerH) {
+  const byWidth = (innerW - M.pad * 2 - (cols - 1) * M.gap) / cols;
+  const byHeight = ((innerH - M.header - M.pad * 2 - (rows - 1) * M.gap) / rows - M.titleH) / M.ratio;
+  return Math.floor(Math.min(byWidth, byHeight));
+}
+
+// Columns that fit across innerW at the given card width.
+const colsAt = (w, innerW) => Math.max(1, Math.floor((innerW - M.pad * 2 + M.gap) / (w + M.gap)));
+
+// Outer window position for a preset.
+export function placeWindow(preset, area, width, height) {
+  const right = area.left + area.width;
+  const bottom = area.top + area.height;
+  const centerLeft = area.left + Math.round((area.width - width) / 2);
+  const centerTop = area.top + Math.round((area.height - height) / 2);
+  const [left, top] = {
+    center: [centerLeft, centerTop],
+    top: [centerLeft, area.top + M.margin],
+    bottom: [centerLeft, bottom - height - M.margin],
+    left: [area.left + M.margin, centerTop],
+    right: [right - width - M.margin, centerTop],
+  }[preset] || [centerLeft, centerTop];
+  return { left, top };
+}
+
 /**
  * @param {object} p
  * @param {number} p.count    number of cards
  * @param {string} p.preset   center | top | bottom | left | right
  * @param {number} p.columns  column count for the center preset
  * @param {{left:number,top:number,width:number,height:number}} p.area  display work area
- * @param {{w:number,h:number}} p.frame  window frame size (outer - inner)
+ * @param {{w:number,h:number}} p.frame  window frame size in screen px (outer - inner * zoom)
+ * @param {number} p.minCard  minimum card width; below it the grid scrolls
+ * @param {number} p.zoom     page zoom of the switcher; grid metrics are CSS px, window bounds screen px
  */
-export function computeLayout({ count, preset, columns, area, frame }) {
+export function computeLayout({ count, preset, columns, area, frame, minCard = M.minCard, zoom = 1 }) {
   count = Math.max(1, count);
   const box = BOX[preset] || BOX.center;
   const maxOuterW = Math.floor(area.width * box.w);
   const maxOuterH = Math.floor(area.height * box.h);
-  const maxW = maxOuterW - frame.w;
-  const maxH = maxOuterH - frame.h;
+  const maxW = (maxOuterW - frame.w) / zoom;
+  const maxH = (maxOuterH - frame.h) / zoom;
   const horizontal = preset === 'top' || preset === 'bottom';
 
   const colOptions = preset === 'center' || !BOX[preset]
@@ -51,9 +79,7 @@ export function computeLayout({ count, preset, columns, area, frame }) {
   let best = null;
   for (const cols of colOptions) {
     const rows = Math.ceil(count / cols);
-    const byWidth = (maxW - M.pad * 2 - (cols - 1) * M.gap) / cols;
-    const byHeight = ((maxH - M.header - M.pad * 2 - (rows - 1) * M.gap) / rows - M.titleH) / M.ratio;
-    const w = Math.floor(Math.min(M.maxCard, byWidth, byHeight));
+    const w = Math.min(M.maxCard, fitCardWidth(cols, rows, maxW, maxH));
     // Edge presets: the first (thinnest) shape with comfortably sized cards wins,
     // e.g. a single row for top/bottom. Otherwise larger cards win; ties prefer the thinner shape.
     if (!best?.pref) {
@@ -65,31 +91,35 @@ export function computeLayout({ count, preset, columns, area, frame }) {
 
   let { cols, rows, w } = best;
   let scroll = false;
-  if (w < M.minCard) {
+  if (w < minCard) {
     // Too many tabs to fit: use the minimum card size, fill the width, and scroll.
-    w = M.minCard;
-    const fitCols = Math.max(1, Math.floor((maxW - M.pad * 2 + M.gap) / (w + M.gap)));
+    w = minCard;
+    const fitCols = colsAt(w, maxW);
     cols = preset === 'center' ? Math.min(columns, count, fitCols) : Math.min(count, fitCols);
     rows = Math.ceil(count / cols);
     scroll = true;
   }
 
-  const width = Math.min(maxOuterW, gridWidth(cols, w) + frame.w);
-  const height = Math.min(maxOuterH, gridHeight(rows, w) + frame.h);
-  const right = area.left + area.width;
-  const bottom = area.top + area.height;
-  const centerLeft = area.left + Math.round((area.width - width) / 2);
-  const centerTop = area.top + Math.round((area.height - height) / 2);
+  const width = Math.min(maxOuterW, Math.round(gridWidth(cols, w) * zoom) + frame.w);
+  const height = Math.min(maxOuterH, Math.round(gridHeight(rows, w) * zoom) + frame.h);
+  return { cols, rows, cardW: w, scroll, width, height, ...placeWindow(preset, area, width, height) };
+}
 
-  const pos = {
-    center: [centerLeft, centerTop],
-    top: [centerLeft, area.top + M.margin],
-    bottom: [centerLeft, bottom - height - M.margin],
-    left: [area.left + M.margin, centerTop],
-    right: [right - width - M.margin, centerTop],
-  }[preset] || [centerLeft, centerTop];
-
-  return { cols, rows, cardW: w, scroll, width, height, left: pos[0], top: pos[1] };
+/**
+ * Fit cards into a window whose size the user chose. The window keeps its size and the cards
+ * scale instead: a wide window is filled by height, a tall one by width (whichever constrains).
+ * More tabs make cards smaller; below minCard they stay at minCard and the grid scrolls.
+ */
+export function fitToWindow({ count, innerW, innerH, minCard = M.minCard }) {
+  count = Math.max(1, count);
+  let best = null;
+  for (let cols = 1; cols <= count; cols++) {
+    const rows = Math.ceil(count / cols);
+    const w = fitCardWidth(cols, rows, innerW, innerH);
+    if (!best || w > best.w) best = { cols, w };
+  }
+  if (best.w >= minCard) return { cols: best.cols, cardW: best.w, scroll: false };
+  return { cols: Math.min(count, colsAt(minCard, innerW)), cardW: minCard, scroll: true };
 }
 
 // Toolbar popup: Chrome caps popups at 800x600, so only the card width scales.

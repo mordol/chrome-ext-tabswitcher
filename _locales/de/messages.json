@@ -37,6 +37,9 @@
   "columns": {
     "message": "Miniaturen pro Zeile"
   },
+  "minThumbWidth": {
+    "message": "Minimale Miniaturbreite"
+  },
   "theme": {
     "message": "Design"
   },
