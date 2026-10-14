@@ -247,7 +247,10 @@ async function recordCreateDelta() {
   if (requested?.length !== 4) return;
   const win = await chrome.windows.get(selfWindowId);
   const createDelta = Object.fromEntries(BOUND_KEYS.map((k, i) => [k, win[k] - requested[i]]));
-  await chrome.storage.local.set({ createDelta });
+  // A large difference means the browser clamped or moved the window for some other reason
+  // (minimum size, display change); remembering it would skew every later window.
+  if (Object.values(createDelta).every((d) => Math.abs(d) <= 200)) await chrome.storage.local.set({ createDelta });
+  else await chrome.storage.local.remove('createDelta');
 }
 
 let saveSizeTimer;

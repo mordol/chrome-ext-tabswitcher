@@ -167,6 +167,25 @@ async function workAreaFor(win) {
 }
 
 
+const MAX_DELTA = 200;   // larger create/actual differences are measurement errors, not frame size
+const MIN_REQUEST = 100; // never request a window smaller than this
+
+function applyDelta(bounds, delta) {
+  const keys = ['left', 'top', 'width', 'height'];
+  if (!delta || !keys.every((k) => Number.isFinite(delta[k]) && Math.abs(delta[k]) <= MAX_DELTA)) return bounds;
+  const req = Object.fromEntries(keys.map((k) => [k, bounds[k] - delta[k]]));
+  return req.width >= MIN_REQUEST && req.height >= MIN_REQUEST ? req : bounds;
+}
+
+function createSwitcher(windowId, req) {
+  return chrome.windows.create({
+    url: `switcher.html?mode=window&windowId=${windowId}&req=${[req.left, req.top, req.width, req.height]}`,
+    type: 'popup',
+    focused: true,
+    ...req,
+  });
+}
+
 async function toggleSwitcherWindow() {
   const { switcherId } = await chrome.storage.session.get('switcherId');
   if (switcherId !== undefined) {
@@ -205,19 +224,17 @@ async function toggleSwitcherWindow() {
   }
   // Some browsers (e.g. Dia) size a new window differently than requested; the switcher page
   // measures the difference (createDelta) and we pre-compensate for it here.
-  const d = createDelta || {};
-  const req = {
-    left: layout.left - (d.left || 0),
-    top: layout.top - (d.top || 0),
-    width: layout.width - (d.width || 0),
-    height: layout.height - (d.height || 0),
-  };
-  const win = await chrome.windows.create({
-    url: `switcher.html?mode=window&windowId=${target.id}&req=${[req.left, req.top, req.width, req.height]}`,
-    type: 'popup',
-    focused: true,
-    ...req,
-  });
+  const bounds = { left: layout.left, top: layout.top, width: layout.width, height: layout.height };
+  let req = applyDelta(bounds, createDelta);
+  let win;
+  try {
+    win = await createSwitcher(target.id, req);
+  } catch {
+    // A bad stored delta must not break the switcher for good: drop it and use the plain bounds.
+    await chrome.storage.local.remove('createDelta');
+    req = bounds;
+    win = await createSwitcher(target.id, req);
+  }
   await chrome.storage.session.set({ switcherId: win.id });
 }
 
