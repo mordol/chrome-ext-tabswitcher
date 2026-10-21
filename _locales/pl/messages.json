@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Przeciągnij miniaturę lub naciśnij Alt (⌥) + strzałki, aby zmienić kolejność kart."
+  },
+  "notchTrigger": {
+    "message": "Wcięcie u góry"
+  },
+  "notchHover": {
+    "message": "Otwieraj po najechaniu"
+  },
+  "notchClick": {
+    "message": "Otwieraj po kliknięciu"
+  },
+  "notchOff": {
+    "message": "Wyłączone"
+  },
+  "notchVisibility": {
+    "message": "Widoczność wcięcia"
+  },
+  "notchNear": {
+    "message": "Tylko gdy kursor jest blisko"
+  },
+  "notchAlways": {
+    "message": "Zawsze"
   }
 }

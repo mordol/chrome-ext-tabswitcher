@@ -39,6 +39,14 @@ Inspired by [Tab Thumbnails](https://chromewebstore.google.com/detail/tab-thumbn
 
 The default shortcut to open the switcher is `Ctrl+Shift+E` (`⌘+Shift+E` on macOS). Change it with the **Change** button in settings, which opens `chrome://extensions/shortcuts`.
 
+### Top notch
+A small notch at the top center of every page opens the switcher.
+- **Top notch** setting: open on hover (default; after a short pause so passing by doesn't trigger it), open on click, or off.
+- **Notch visibility** setting: only when the mouse is near (default), or always as a thin bar.
+- After the switcher opens, move the mouse off the notch before it can open again.
+- The notch is hidden in fullscreen and never blocks clicks on the page while it is invisible.
+- It can't appear on restricted pages (`chrome://`, the Web Store, some browser-internal pages such as the new tab page, the PDF viewer); use the shortcut there.
+
 ### Window position presets
 By default the switcher opens as a floating window. You can place it in one of five positions:
 
@@ -95,6 +103,7 @@ Requires Chrome / Chromium 140 or later.
 | `<all_urls>` (host) | Capturing thumbnails of tabs with `captureVisibleTab` |
 | `storage`, `unlimitedStorage` | Saving thumbnails and settings locally |
 | `favicon` | Showing favicons |
+| `scripting` | Adding the top notch to tabs that were already open when the extension was installed or updated |
 | `system.display` | Finding the screen area to place the switcher window |
 
 All data stays in local extension storage. Nothing is sent anywhere.
@@ -110,6 +119,7 @@ All data stays in local extension storage. Nothing is sent anywhere.
 ```
 manifest.json         Extension manifest (MV3)
 background.js         Service worker: thumbnail capture, shortcut, switcher window
+notch.js              Content script: top-center notch that opens the switcher
 switcher.html/css/js  Switcher UI, keyboard handling, settings panel
 shared/layout.js      Window size, position, and card size for each preset
 shared/split.js       Groups tabs into cards, including split view detection

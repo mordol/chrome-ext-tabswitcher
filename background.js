@@ -151,7 +151,14 @@ async function applyOpenMode() {
   await chrome.action.setPopup({ popup: openMode === 'popup' ? 'switcher.html?mode=popup' : '' });
 }
 
-chrome.runtime.onInstalled.addListener(() => { applyOpenMode(); pruneThumbs(); });
+// Manifest content scripts only reach pages loaded after install/update; add the notch to open tabs.
+async function injectNotch() {
+  for (const tab of await chrome.tabs.query({ url: ['http://*/*', 'https://*/*', 'file://*/*'] })) {
+    chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['notch.js'] }).catch(() => {});
+  }
+}
+
+chrome.runtime.onInstalled.addListener(() => { applyOpenMode(); pruneThumbs(); injectNotch(); });
 chrome.runtime.onStartup.addListener(() => { applyOpenMode(); pruneThumbs(); });
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local' && changes.settings) applyOpenMode();
@@ -186,10 +193,15 @@ function createSwitcher(windowId, req) {
   });
 }
 
-async function toggleSwitcherWindow() {
+// toggle: close the switcher if it is open. The notch only opens (or focuses) it.
+async function toggleSwitcherWindow({ toggle = true } = {}) {
   const { switcherId } = await chrome.storage.session.get('switcherId');
   if (switcherId !== undefined) {
     const existing = await chrome.windows.get(switcherId).catch(() => null);
+    if (existing && !toggle) {
+      await chrome.windows.update(switcherId, { focused: true });
+      return;
+    }
     await chrome.storage.session.remove('switcherId');
     if (existing) {
       await chrome.windows.remove(switcherId).catch(() => {});
@@ -253,6 +265,13 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg.type === 'openSwitcher') {
+    loadSettings().then(({ openMode }) => {
+      if (openMode === 'popup') chrome.action.openPopup().catch(() => {}); // may need a user gesture
+      else toggleSwitcherWindow({ toggle: false });
+    });
+    return;
+  }
   if (msg.type === 'refreshAll') {
     refreshAll(msg.windowId).then(() => sendResponse({ ok: true }), () => sendResponse({ ok: false }));
     return true;

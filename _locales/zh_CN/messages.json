@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "拖动缩略图或按 Alt (⌥) + 方向键可调整标签页顺序。"
+  },
+  "notchTrigger": {
+    "message": "顶部凹口"
+  },
+  "notchHover": {
+    "message": "悬停时打开"
+  },
+  "notchClick": {
+    "message": "点击时打开"
+  },
+  "notchOff": {
+    "message": "关闭"
+  },
+  "notchVisibility": {
+    "message": "凹口显示"
+  },
+  "notchNear": {
+    "message": "仅在鼠标靠近时"
+  },
+  "notchAlways": {
+    "message": "始终"
   }
 }

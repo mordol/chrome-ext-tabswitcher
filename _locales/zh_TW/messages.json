@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "拖曳縮圖或按 Alt (⌥) + 方向鍵可調整分頁順序。"
+  },
+  "notchTrigger": {
+    "message": "頂部凹口"
+  },
+  "notchHover": {
+    "message": "滑鼠停留時開啟"
+  },
+  "notchClick": {
+    "message": "點擊時開啟"
+  },
+  "notchOff": {
+    "message": "關閉"
+  },
+  "notchVisibility": {
+    "message": "凹口顯示"
+  },
+  "notchNear": {
+    "message": "僅在滑鼠靠近時"
+  },
+  "notchAlways": {
+    "message": "一律顯示"
   }
 }

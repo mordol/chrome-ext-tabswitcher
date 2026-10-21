@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Drag a thumbnail, or press Alt (⌥) + arrow keys, to reorder tabs."
+  },
+  "notchTrigger": {
+    "message": "Top notch"
+  },
+  "notchHover": {
+    "message": "Open on hover"
+  },
+  "notchClick": {
+    "message": "Open on click"
+  },
+  "notchOff": {
+    "message": "Off"
+  },
+  "notchVisibility": {
+    "message": "Notch visibility"
+  },
+  "notchNear": {
+    "message": "Only when the mouse is near"
+  },
+  "notchAlways": {
+    "message": "Always"
   }
 }

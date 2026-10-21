@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Arrastra una miniatura o pulsa Alt (⌥) + flechas para reordenar las pestañas."
+  },
+  "notchTrigger": {
+    "message": "Muesca superior"
+  },
+  "notchHover": {
+    "message": "Abrir al pasar el ratón"
+  },
+  "notchClick": {
+    "message": "Abrir al hacer clic"
+  },
+  "notchOff": {
+    "message": "Desactivada"
+  },
+  "notchVisibility": {
+    "message": "Visibilidad de la muesca"
+  },
+  "notchNear": {
+    "message": "Solo cuando el ratón está cerca"
+  },
+  "notchAlways": {
+    "message": "Siempre"
   }
 }

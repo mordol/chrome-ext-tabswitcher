@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "썸네일을 드래그하거나 Alt(⌥) + 방향키로 탭 순서를 바꿀 수 있습니다."
+  },
+  "notchTrigger": {
+    "message": "상단 노치"
+  },
+  "notchHover": {
+    "message": "마우스를 올리면 열기"
+  },
+  "notchClick": {
+    "message": "클릭하면 열기"
+  },
+  "notchOff": {
+    "message": "사용 안 함"
+  },
+  "notchVisibility": {
+    "message": "노치 표시"
+  },
+  "notchNear": {
+    "message": "마우스가 가까이 올 때만"
+  },
+  "notchAlways": {
+    "message": "항상"
   }
 }

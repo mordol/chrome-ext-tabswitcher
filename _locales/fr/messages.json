@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Faites glisser une miniature ou appuyez sur Alt (⌥) + flèches pour réorganiser les onglets."
+  },
+  "notchTrigger": {
+    "message": "Encoche supérieure"
+  },
+  "notchHover": {
+    "message": "Ouvrir au survol"
+  },
+  "notchClick": {
+    "message": "Ouvrir au clic"
+  },
+  "notchOff": {
+    "message": "Désactivée"
+  },
+  "notchVisibility": {
+    "message": "Visibilité de l'encoche"
+  },
+  "notchNear": {
+    "message": "Seulement quand la souris est proche"
+  },
+  "notchAlways": {
+    "message": "Toujours"
   }
 }

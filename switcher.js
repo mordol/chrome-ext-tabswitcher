@@ -441,6 +441,11 @@ async function initSettings() {
   $('openMode').value = settings.openMode;
   $('openMode').addEventListener('change', (e) => update({ openMode: e.target.value }));
 
+  for (const key of ['notchTrigger', 'notchVisibility']) {
+    $(key).value = settings[key];
+    $(key).addEventListener('change', (e) => update({ [key]: e.target.value }));
+  }
+
   const presetButtons = [...$('preset').querySelectorAll('button')];
   const markPreset = () => presetButtons.forEach((b) => b.classList.toggle('on', b.dataset.preset === settings.preset));
   markPreset();

@@ -5,6 +5,8 @@ export const DEFAULT_SETTINGS = {
   openMode: 'window',  // window | popup
   preset: 'center',    // center | top | bottom | left | right
   minCard: 120,        // minimum thumbnail width (px); below it the grid scrolls
+  notchTrigger: 'hover',   // hover | click | off (top-center notch on pages)
+  notchVisibility: 'near', // near | always
 };
 
 export const PRESETS = ['center', 'top', 'bottom', 'left', 'right'];

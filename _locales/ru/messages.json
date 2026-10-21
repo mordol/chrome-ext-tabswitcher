@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Перетащите миниатюру или нажмите Alt (⌥) + стрелки, чтобы изменить порядок вкладок."
+  },
+  "notchTrigger": {
+    "message": "Верхняя выемка"
+  },
+  "notchHover": {
+    "message": "Открывать при наведении"
+  },
+  "notchClick": {
+    "message": "Открывать по щелчку"
+  },
+  "notchOff": {
+    "message": "Выключено"
+  },
+  "notchVisibility": {
+    "message": "Видимость выемки"
+  },
+  "notchNear": {
+    "message": "Только когда указатель рядом"
+  },
+  "notchAlways": {
+    "message": "Всегда"
   }
 }

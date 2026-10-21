@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Ziehe eine Miniatur oder drücke Alt (⌥) + Pfeiltasten, um Tabs neu anzuordnen."
+  },
+  "notchTrigger": {
+    "message": "Obere Kerbe"
+  },
+  "notchHover": {
+    "message": "Beim Überfahren öffnen"
+  },
+  "notchClick": {
+    "message": "Beim Klicken öffnen"
+  },
+  "notchOff": {
+    "message": "Aus"
+  },
+  "notchVisibility": {
+    "message": "Sichtbarkeit der Kerbe"
+  },
+  "notchNear": {
+    "message": "Nur wenn die Maus in der Nähe ist"
+  },
+  "notchAlways": {
+    "message": "Immer"
   }
 }

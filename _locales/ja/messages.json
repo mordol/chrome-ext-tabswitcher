@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "サムネイルをドラッグするか、Alt (⌥) + 矢印キーでタブの順序を変更できます。"
+  },
+  "notchTrigger": {
+    "message": "上部ノッチ"
+  },
+  "notchHover": {
+    "message": "ホバーで開く"
+  },
+  "notchClick": {
+    "message": "クリックで開く"
+  },
+  "notchOff": {
+    "message": "オフ"
+  },
+  "notchVisibility": {
+    "message": "ノッチの表示"
+  },
+  "notchNear": {
+    "message": "マウスが近づいたときのみ"
+  },
+  "notchAlways": {
+    "message": "常に表示"
   }
 }

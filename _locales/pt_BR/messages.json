@@ -96,5 +96,26 @@
   },
   "reorderHelp": {
     "message": "Arraste uma miniatura ou pressione Alt (⌥) + setas para reordenar as abas."
+  },
+  "notchTrigger": {
+    "message": "Entalhe superior"
+  },
+  "notchHover": {
+    "message": "Abrir ao passar o mouse"
+  },
+  "notchClick": {
+    "message": "Abrir ao clicar"
+  },
+  "notchOff": {
+    "message": "Desativado"
+  },
+  "notchVisibility": {
+    "message": "Visibilidade do entalhe"
+  },
+  "notchNear": {
+    "message": "Só quando o mouse está perto"
+  },
+  "notchAlways": {
+    "message": "Sempre"
   }
 }
