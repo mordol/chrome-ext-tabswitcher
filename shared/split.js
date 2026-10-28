@@ -1,8 +1,10 @@
 // Groups a window's tabs into cards: split views become one group of two tabs.
 //
 // Chrome 155+ reports split views via tab.splitViewId. Browsers that implement their own
-// split view (e.g. Dia) leave it at -1, so fall back to geometry: two adjacent tabs whose
-// widths add up to a full-width tab (minus the divider) are side by side.
+// split view (e.g. Dia) leave it at -1, so fall back to geometry: two tabs whose widths add
+// up to a full-width tab (minus the divider) are side by side. They are usually adjacent, but
+// a tab opened from a split pane is inserted between them, so a later partner is accepted too;
+// the card takes the position of the first pane.
 
 export const SPLIT_NONE = -1;
 
@@ -26,8 +28,10 @@ export function groupTabs(tabs, windowWidth) {
   const full = fullWidth(tabs, windowWidth);
   const bySplitId = new Map();
   const groups = [];
+  const paired = new Set(); // later tabs already taken as the second pane of a split
   for (let i = 0; i < tabs.length; i++) {
     const tab = tabs[i];
+    if (paired.has(tab)) continue;
     if (hasSplitId(tab)) {
       let group = bySplitId.get(tab.splitViewId);
       if (!group) {
@@ -38,10 +42,12 @@ export function groupTabs(tabs, windowWidth) {
       group.push(tab);
       continue;
     }
-    const next = tabs[i + 1];
-    if (next && !hasSplitId(next) && looksPaired(tab, next, full)) {
-      groups.push([tab, next]);
-      i++;
+    // Nearest later partner; the adjacent tab comes first, so the usual case is unchanged.
+    const partner = tabs.slice(i + 1).find((other) =>
+      !hasSplitId(other) && !paired.has(other) && looksPaired(tab, other, full));
+    if (partner) {
+      paired.add(partner);
+      groups.push([tab, partner]);
     } else {
       groups.push([tab]);
     }
